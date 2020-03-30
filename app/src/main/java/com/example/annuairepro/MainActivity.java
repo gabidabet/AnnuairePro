@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         updateContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callAddContact();
+                callUpdateActivity(listContact.get(position));
                 popupWindow.dismiss();
             }
         });
@@ -132,12 +132,26 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddContactActivity.class);
         startActivityForResult(intent, 1);
     }
+    private void callUpdateActivity(ContactModel cm){
+        Intent intent = new Intent(this, UpdateContactActivity.class);
+        intent.putExtra("updatedContact",cm);
+        startActivityForResult(intent, 2);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
-        ContactAdapter ca = (ContactAdapter) listView.getAdapter();
-        Log.d(TAG, "onActivityResult: CalledHELLO");
-        ca.getList().add((ContactModel) data.getExtras().get("result"));
-        ca.notifyDataSetChanged();
+        if(requestCode == 1){
+            ContactAdapter ca = (ContactAdapter) listView.getAdapter();
+            Log.d(TAG, "onActivityResult: CalledHELLO");
+            ContactModel cm = (ContactModel) data.getExtras().get("result");
+            if(cm != null){
+                listContact.add(cm);
+                ca.getList().add(cm);
+                ca.notifyDataSetChanged();
+            }
+        }else if(requestCode == 2){
+            ContactAdapter ca = (ContactAdapter) listView.getAdapter();
+            ca.notifyDataSetChanged();
+        }
     }
 }

@@ -63,8 +63,10 @@ public class ContactService {
         return contacts;
     }
     public void addContact(ContactModel cm){
-        contacts.add(cm);
         dbh.addContact(cm);
+    }
+    public void updateContact(ContactModel cm){
+        dbh.updateContact(cm);
     }
     public void deleteContact(int id){
         dbh.deleteContact(id);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -133,6 +134,22 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
         db.close();
         return contactsList;
+    }
+    public void updateContact(ContactModel cm){
+        SQLiteStatement statement = db.compileStatement("" +
+                "UPDATE " + TABLE_CONTACTS + " SET " + KEY_FIRSTNAME + " = ? ," +
+                " " + KEY_LASTNAME + " = ? ," +
+                " " + KEY_EMAIL + " = ? ," +
+                " " + KEY_PHONE + " = ? ," +
+                " " + KEY_JOB + " = ? WHERE " +
+                "id = ?");
+        statement.bindString(1, cm.getFirstName());
+        statement.bindString(2, cm.getLastName());
+        statement.bindString(3, cm.getEmail());
+        statement.bindString(4, cm.getNumber());
+        statement.bindString(5, cm.getJob());
+        statement.bindLong(6, cm.getId());
+        statement.executeInsert();
     }
     public void deleteContact(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
