@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".UDContactPopUpActivity"
+    tools:deviceIds="wear"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:text="@string/update_contact"
+        android:padding="20dp"
+        android:textSize="15dp"
+        android:background="@color/colorPrimary"
+        android:id="@+id/update_button"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:text="@string/delete_contact"
+        android:padding="20dp"
+        android:textSize="15dp"
+        android:background="@color/colorPrimary"
+        android:id="@+id/delete_button"/>
+</LinearLayout>
